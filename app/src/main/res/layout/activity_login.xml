@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:background="#feebef"
+    android:gravity="center"
+    android:layout_gravity="center_vertical"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".loginActivity">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="EAMS"
+        android:layout_marginBottom="94dp"
+        android:textColor="@color/black"
+        android:textSize="24dp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etName"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="6dp"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="24dp"
+        android:padding="12dp"
+        android:textSize="12dp"
+        android:background="@drawable/edt_background_border"
+        android:inputType="text"
+        android:hint="Name" />
+
+    <TextView
+        android:id="@+id/tvNext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:background="@drawable/orange_btn_bg"
+        android:layout_marginTop="38dp"
+        android:textStyle="bold"
+        android:padding="6dp"
+        android:gravity="center"
+        android:text="Next"
+        android:textSize="15dp"
+        android:textColor="@color/white"/>
+
+</LinearLayout>
