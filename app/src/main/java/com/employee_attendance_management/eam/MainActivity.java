@@ -15,16 +15,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-
 import androidx.core.view.GravityCompat;
-
 import androidx.drawerlayout.widget.DrawerLayout;
-
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -42,7 +37,6 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
-
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
@@ -62,9 +56,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private static final int LOCATION_PERMISSION_REQUEST = 1;
 
 
-//    private static final double OFFICE_LAT = 12.971598; // Example: Replace with your office latitude
     private double OFFICE_LAT = 25.5948824; // Example: Replace with your office latitude
-    //    private static final double OFFICE_LNG = 77.594566; // Example: Replace with your office longitude
     private double OFFICE_LNG = 85.1497289; // Example: Replace with your office longitude
     private static final float RADIUS_IN_METERS = 1000; // 1 km radius
     private static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -81,7 +73,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         SharedPreferences userDetails = this.getSharedPreferences("CNB", MODE_PRIVATE);
         userName = userDetails.getString("userName", "NONAME");
@@ -102,8 +93,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
             tvCheckInOut.setText("Check Out");
-
-
 
         }
 //        else {
@@ -133,10 +122,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
              public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                  int itemId = item.getItemId();
                  if (itemId == R.id.nav_attendance_record) {
-                     Intent intent = new Intent(MainActivity.this, officeSettingActivity.class);
+                     Intent intent = new Intent(MainActivity.this, employeeRecordsActivity.class);
                      startActivity(intent);
                  } else if (itemId == R.id.nav_settings) {
-                     Intent intent = new Intent(MainActivity.this, employeeRecordsActivity.class);
+                     Intent intent = new Intent(MainActivity.this, officeSettingActivity.class);
                      startActivity(intent);
                  }
                  drawerLayout.closeDrawer(GravityCompat.START);

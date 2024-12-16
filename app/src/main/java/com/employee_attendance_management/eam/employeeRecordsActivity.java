@@ -2,6 +2,7 @@ package com.employee_attendance_management.eam;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -29,17 +30,17 @@ public class employeeRecordsActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.rvRecords);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        ivBackBtn = findViewById(R.id.ivBackBtn);
+
         ivBackBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent();
-                startActivity(intent);
-                finish();
+                onBackPressed();
             }
         });
 
-        dbHelper = new DatabaseHelper(this);
         List<AttendanceRecord> records = dbHelper.getAllAttendanceRecords();
+        Log.e("RECORDS", records.toString());
 
         AttendanceRecordAdapter adapter = new AttendanceRecordAdapter(records);
         recyclerView.setAdapter(adapter);

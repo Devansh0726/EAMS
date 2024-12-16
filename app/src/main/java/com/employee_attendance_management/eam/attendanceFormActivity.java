@@ -1,5 +1,6 @@
 package com.employee_attendance_management.eam;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -27,6 +29,7 @@ public class attendanceFormActivity extends AppCompatActivity {
     double userLongitude;
 
     String userName;
+    @SuppressLint("WrongThread")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,15 +45,17 @@ public class attendanceFormActivity extends AppCompatActivity {
         TextView tvConfirm = findViewById(R.id.tvConfirm);
         TextView tvCheckInOut = findViewById(R.id.tvCheckInOut);
 
-
-
-
         Bitmap imageBitmap = (Bitmap) getIntent().getParcelableExtra("imageBitmap");
         capturedImage.setImageBitmap(imageBitmap);
         userLongitude = getIntent().getDoubleExtra("userLongitude", 0);
         userLatitude = getIntent().getDoubleExtra("userLatitude", 0);
         userName = getIntent().getStringExtra("userName");
 
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] imageByte = stream.toByteArray();
+
+//        byte[] imageByte = getIntent().getByteArrayExtra("imageBitmap");
         Log.e("FORM", userName);
 
         tvName.setText(userName);
@@ -85,7 +90,7 @@ public class attendanceFormActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String name = userName; // Replace with actual user name
-                byte[] image = null;      // Replace with actual image bytes
+                byte[] image = imageByte;      // Replace with actual image bytes
                 double latitude = userLatitude; // Replace with actual latitude
                 double longitude = userLongitude; // Replace with actual longitude
 

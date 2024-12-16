@@ -105,18 +105,52 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+//    public List<AttendanceRecord> getAllAttendanceRecords() {
+//        List<AttendanceRecord> records = new ArrayList<>();
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        String query = "SELECT " +
+//                COLUMN_IMAGE + ", " +
+//                COLUMN_TIME + " AS checkInTime, " + // Alias for check-in time
+//                "(SELECT " + COLUMN_TIME + " FROM " + TABLE_NAME + " AS T2 WHERE T2." + COLUMN_NAME + " = T1." + COLUMN_NAME + " AND T2." + COLUMN_DATE + " = T1." + COLUMN_DATE + " AND T2." + COLUMN_STATUS + " = 'check-out') AS checkOutTime, " + // Subquery for check-out time
+//                COLUMN_NAME + ", " +
+//                COLUMN_LATITUDE + ", " +
+//                COLUMN_LONGITUDE +
+//                " FROM " + TABLE_NAME + " AS T1" +
+//                " WHERE " + COLUMN_STATUS + " = 'check-in'"; // Filter for check-in records
+//
+//        Cursor cursor = db.rawQuery(query, null);
+//        if (cursor.moveToFirst()) {
+//            do {
+//                AttendanceRecord record = new AttendanceRecord();
+//                record.setImage(cursor.getBlob(cursor.getColumnIndexOrThrow(COLUMN_IMAGE)));
+//                record.setCheckInTime(cursor.getString(cursor.getColumnIndexOrThrow("checkInTime")));
+//                record.setCheckOutTime(cursor.getString(cursor.getColumnIndexOrThrow("checkOutTime")));
+//                record.setName(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME)));
+//                record.setLatitude(cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_LATITUDE)));
+//                record.setLongitude(cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_LONGITUDE)));
+//                records.add(record);
+//            } while (cursor.moveToNext());
+//        }
+//        cursor.close();
+//        db.close();
+//        return records;
+//    }
+
     public List<AttendanceRecord> getAllAttendanceRecords() {
         List<AttendanceRecord> records = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
+
+        // Modified query to include both check-in and check-out records
         String query = "SELECT " +
                 COLUMN_IMAGE + ", " +
-                COLUMN_TIME + " AS checkInTime, " + // Alias for check-in time
-                "(SELECT " + COLUMN_TIME + " FROM " + TABLE_NAME + " AS T2 WHERE T2." + COLUMN_NAME + " = T1." + COLUMN_NAME + " AND T2." + COLUMN_DATE + " = T1." + COLUMN_DATE + " AND T2." + COLUMN_STATUS + " = 'check-out') AS checkOutTime, " + // Subquery for check-out time
+                COLUMN_TIME + " AS checkInTime, " +
+                "(SELECT " + COLUMN_TIME + " FROM " + TABLE_NAME + " AS T2 WHERE T2." + COLUMN_NAME + " = T1." + COLUMN_NAME + " AND T2." + COLUMN_DATE + " = T1." + COLUMN_DATE + " AND T2." + COLUMN_STATUS + " = 'check-out') AS checkOutTime, " +
                 COLUMN_NAME + ", " +
                 COLUMN_LATITUDE + ", " +
-                COLUMN_LONGITUDE +
+                COLUMN_LONGITUDE + ", " +
+                COLUMN_DATE + // Include date in the query
                 " FROM " + TABLE_NAME + " AS T1" +
-                " WHERE " + COLUMN_STATUS + " = 'check-in'"; // Filter for check-in records
+                " WHERE " + COLUMN_STATUS + " IN ('check-in', 'check-out')"; // Include both statuses
 
         Cursor cursor = db.rawQuery(query, null);
         if (cursor.moveToFirst()) {
@@ -128,6 +162,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 record.setName(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME)));
                 record.setLatitude(cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_LATITUDE)));
                 record.setLongitude(cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_LONGITUDE)));
+                record.setDate(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DATE))); // Set the date
                 records.add(record);
             } while (cursor.moveToNext());
         }

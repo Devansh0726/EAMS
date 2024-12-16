@@ -7,19 +7,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.employee_attendance_management.eam.R;
 import com.employee_attendance_management.eam.models.AttendanceRecord;
-
 import java.util.List;
 
 public class AttendanceRecordAdapter extends RecyclerView.Adapter<AttendanceRecordAdapter.ViewHolder> {
 
     private List<AttendanceRecord> records;
-
     public AttendanceRecordAdapter(List<AttendanceRecord> records) {
         this.records = records;
     }
@@ -35,9 +31,7 @@ public class AttendanceRecordAdapter extends RecyclerView.Adapter<AttendanceReco
     @Override
     public void onBindViewHolder(@NonNull AttendanceRecordAdapter.ViewHolder holder, int position) {
 
-
         AttendanceRecord record = records.get(position);
-
         // Set data to views
         Bitmap imageBitmap = BitmapFactory.decodeByteArray(record.getImage(), 0, record.getImage().length);
         holder.imageView.setImageBitmap(imageBitmap);
@@ -45,6 +39,7 @@ public class AttendanceRecordAdapter extends RecyclerView.Adapter<AttendanceReco
         holder.checkInTextView.setText("Check-in: " + record.getCheckInTime());
         holder.checkOutTextView.setText("Check-out: " + record.getCheckOutTime());
         holder.locationTextView.setText("Location: " + record.getLatitude() + ", " + record.getLongitude());
+        holder.dateTextView.setText("Date: " + record.getDate());
     }
 
     @Override
@@ -55,6 +50,7 @@ public class AttendanceRecordAdapter extends RecyclerView.Adapter<AttendanceReco
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
         TextView nameTextView;
+        TextView dateTextView;
         TextView checkInTextView;
         TextView checkOutTextView;
         TextView locationTextView;
@@ -66,6 +62,7 @@ public class AttendanceRecordAdapter extends RecyclerView.Adapter<AttendanceReco
             checkInTextView = itemView.findViewById(R.id.checkInTextView);
             checkOutTextView = itemView.findViewById(R.id.checkOutTextView);
             locationTextView = itemView.findViewById(R.id.locationTextView);
+            dateTextView = itemView.findViewById(R.id.dateTextView);
 
         }
     }
