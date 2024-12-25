@@ -54,10 +54,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private FusedLocationProviderClient fusedLocationClient;
     private static final int LOCATION_PERMISSION_REQUEST = 1;
-
-
-    private double OFFICE_LAT = 25.5948824; // Example: Replace with your office latitude
-    private double OFFICE_LNG = 85.1497289; // Example: Replace with your office longitude
+    private double OFFICE_LAT = 25.5948824;
+    private double OFFICE_LNG = 85.1497289;
     private static final float RADIUS_IN_METERS = 1000; // 1 km radius
     private static final int REQUEST_IMAGE_CAPTURE = 1;
 
@@ -91,21 +89,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         } else if (databaseHelper.isCheckedIn(userName, currentDate)) {
 
-
             tvCheckInOut.setText("Check Out");
 
         }
-//        else {
-//
-//            if (result != -1) {
-//                Toast.makeText(MainActivity.this, "Checked In Successfully", Toast.LENGTH_SHORT).show();
-//
-//            } else {
-//                Toast.makeText(MainActivity.this, "Check-in Failed", Toast.LENGTH_SHORT).show();
-//
-//
-//            }
-//        }
+
          drawerLayout = findViewById(R.id.drawer_layout);
          navigationView = findViewById(R.id.nav_view);
          civMenu = findViewById(R.id.civMenu);
@@ -223,8 +210,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                                         startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
                                     }
 
-//                                    Intent intent = new Intent(MainActivity.this, attendanceFormActivity.class);
-//                                    startActivity(intent);
                                 } else {
                                     // Out of range
                                     Toast.makeText(MainActivity.this, "You are not in the office", Toast.LENGTH_SHORT).show();
